@@ -14,8 +14,8 @@ A simple React + TypeScript weather application that lets you search for any cit
 
 - Loading spinner, auto-clearing error messages, and focus management
 
-Demo
-(demo link)[]
+## Demo
+[demo_link](https://weather-ok.vercel.app/)
 
 ## Tech Stack
 - React with Hooks
