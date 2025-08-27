@@ -1,12 +1,17 @@
 import axios from "axios";
 import type { Weather, WeatherResponse } from "../types/Weater";
 import type { GeoData } from "../types/Geo";
+import { getFromCache, saveToCache } from "../utils/getWeathrFromCashe";
 
 const API = axios.create({
 	baseURL: 'https://api.openweathermap.org',
 })
 
 export const getWeather = async (city: string): Promise<Weather> => {
+	const key = city.trim().toLowerCase();
+	const cached = getFromCache(key);
+	if (cached) return cached;
+
 	const LIMIT = import.meta.env.VITE_OPENWEATHER_LIMIT;
 	const API_KEY = import.meta.env.VITE_OPENWEATHER_API_KEY;
 
@@ -26,7 +31,7 @@ export const getWeather = async (city: string): Promise<Weather> => {
 
 	const [weather] = weatherData.weather;
 
-	return {
+	const result = {
 		city: name,
 		weather: weather.main,
 		temperature: weatherData.main.temp,
@@ -35,4 +40,8 @@ export const getWeather = async (city: string): Promise<Weather> => {
 		windSpeed: weatherData.wind.speed,
 		icon: weather.icon,
 	};
+
+	saveToCache(key, result);
+
+	return result;
 }
