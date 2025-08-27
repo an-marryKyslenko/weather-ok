@@ -47,9 +47,6 @@ Create a .env file in the project root with the following variables:
 ```env
 VITE_OPENWEATHER_API_KEY=your_openweathermap_api_key
 VITE_OPENWEATHER_LIMIT=1
-VITE_OPENWEATHER_API_KEY — your OpenWeather API key
-
-VITE_OPENWEATHER_LIMIT — max number of geocoding results (default: 1)
 ```
 
 ### Running Locally
